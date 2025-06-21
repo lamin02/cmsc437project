@@ -1,0 +1,39 @@
+<!-- NIMAH: PHASE 1 - In-flight portal landing page after login/guest selection -->
+
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>In-Flight Homepage</title>
+</head>
+<body>
+
+<h1 id="passenger-greeting">Welcome!</h1>
+<hr>
+
+
+<h2>Current Flight Details</h2>
+<ul>
+    <li>Assigned Flight: 964</li>
+    <li>Final Destination: Rome, Italy</li>
+    <li>Estimated Departure: 9:15 PM</li>
+    <li>Boarding Gate: A12</li>
+    <!--add ETA?? and maybe where we're flying from and curr time?-->
+</ul>
+
+<script>
+// Determine passenger type and show greeting depending if guest or flyer that already has a membership w airline
+    const boardingPassType = localStorage.getItem("boardingPassType"); 
+    const greetingBanner = document.getElementById("passenger-greeting");
+
+    if (boardingPassType === "explorer-guest") {
+        greetingBanner.textContent = "Greetings, Explorer! Enjoy your guest access.";
+    } 
+    else if (boardingPassType === "verified-traveler") {
+        greetingBanner.textContent = "Welcome aboard, Verified Flyer!";
+    } 
+    else {
+        greetingBanner.textContent = "Welcome aboard!";
+    }
+</script>
+
+</body>
