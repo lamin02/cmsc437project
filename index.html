@@ -2,32 +2,65 @@
 <head> 
     <meta charset="UTF-8">
     <title> In Flight System </title> 
-    <h1> Welcome Aboard Your Digital In-Flight System
-        <hr> 
-         </h1>
-
-
-
-
 </head>
 
 <body>
+
+
+<h1>Welcome Aboard Your Digital In-Flight System</h1>
+<hr> 
+
 <style>
     body {
         background-color: beige; 
     }
     h1 {
         text-align: center; 
-        
     }
     hr { 
-    color: black;
+        color: black;
+    }
+    .nav { /*Nimah - PHASE 1: Login navigation class (feel free to play around and change)*/
+        padding: 10px 20px;
+        margin:10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+        background-color: #4CAF50;
+        color: white;
+
+    }
+    .nav:hover {
+        background-color: #45a049;
+    }
+    .button {
+        text-align: center;
+        margin-top: 20px;
     }
 </style>
+
+
 Options to pick from: 
-hi im editing to see if code pushes to github
-london
+hi im editing to see if code pushes to github 
+london 
 rome, italy 
 
-</body> 
+<br><br>
+<div style="text-align: center;">
+    <button class="nav" onclick="handleLogin()">Login</button>
+    <button class="nav" onclick="handleGuest()">Guest</button>
+</div>
 
+<script>
+    function handleLogin() {
+        localStorage.setItem("boardingPassType", "verified-traveler");
+        window.location.href = "homepage.html";
+    }
+
+    function handleGuest() {
+        localStorage.setItem("boardingPassType", "explorer-guest");
+        window.location.href = "homepage.html";
+    }
+  </script>
+
+</body> 
