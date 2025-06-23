@@ -1,0 +1,72 @@
+[
+    {
+        "id": 1,
+        "type": "music",
+        "title": "Voyage",
+        "description": "ABBA's comeback album, marking their return to music after 40 years.",
+        "rating": "8.7"
+    },
+    {
+        "id": 2,
+        "type": "music",
+        "title": "Folklore",
+        "description": "Taylor Swift's introspective indie-folk album, full of storytelling and nostalgia.",
+        "rating": "9.0"
+    },
+    {
+        "id": 3,
+        "type": "music",
+        "title": "When We All Fall Asleep, Where Do We Go?",
+        "description": "Billie Eilish's debut album, blending dark pop with haunting melodies.",
+        "rating": "8.5"
+    },
+    {
+        "id": 4,
+        "type": "music",
+        "title": "Golden Hour",
+        "description": "Kacey Musgraves' country-pop masterpiece, filled with emotional depth and melodies.",
+        "rating": "8.8"
+    },
+    {
+        "id": 5,
+        "type": "music",
+        "title": "25",
+        "description": "Adele's emotional return to the music scene, with ballads that capture the essence of heartbreak.",
+        "rating": "9.1"
+    },
+     {
+        "id": 1,
+        "type": "movie",
+        "title": "Everything Everywhere All at Once",
+        "description": "A sci-fi adventure exploring the multiverse, identity, and family.",
+        "rating": "8.0"
+    },
+    {
+        "id": 2,
+        "type": "movie",
+        "title": "CODA",
+        "description": "A touching story of a deaf family and the only hearing member's dreams of becoming a singer.",
+        "rating": "8.1"
+    },
+    {
+        "id": 3,
+        "type": "movie",
+        "title": "Nomadland",
+        "description": "A moving portrayal of a woman embracing a nomadic lifestyle after the collapse of her town’s economy.",
+        "rating": "7.9"
+    },
+    {
+        "id": 4,
+        "type": "movie",
+        "title": "Parasite",
+        "description": "A South Korean dark comedy-thriller exploring class struggle in modern society.",
+        "rating": "8.6"
+    },
+    {
+        "id": 5,
+        "type": "movie",
+        "title": "The Shape of Water",
+        "description": "A unique love story between a mute woman and a mysterious aquatic creature.",
+        "rating": "7.3"
+    }
+]

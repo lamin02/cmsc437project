@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>In-Flight Entertainment</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .media-card {
+      border: 1px solid #ccc;
+      padding: 16px;
+      border-radius: 8px;
+      background-color: #fefefe;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .media-card h2 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .media-card .type {
+      color: #0077cc;
+      font-weight: bold;
+    }
+
+    .media-card .rating {
+      font-weight: bold;
+      color: #ff9900;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>In-Flight Entertainment</h1>
+  <div id="root"></div>
+
+  <!-- React & Babel CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- Our React App -->
+  <script type="text/babel">
+    const MediaCard = ({ media }) => (
+      <div className="media-card">
+        <h2>{media.title}</h2>
+        <p className="type">{media.type.toUpperCase()}</p>
+        <p>{media.description}</p>
+        <p className="rating">⭐ {media.rating}</p>
+      </div>
+    );
+
+    const App = () => {
+      const [mediaList, setMediaList] = React.useState([]);
+      const [loading, setLoading] = React.useState(true);
+      const [error, setError] = React.useState(null);
+
+      React.useEffect(() => {
+        // Fetch the JSON file
+        fetch('/media.json')
+          .then(response => response.json())
+          .then(data => {
+            setMediaList(data);
+            setLoading(false);
+          })
+          .catch(err => {
+            setError('Failed to load media data');
+            setLoading(false);
+          });
+      }, []);
+
+      if (loading) return <div>Loading...</div>;
+      if (error) return <div>{error}</div>;
+
+      return (
+        <div className="media-grid">
+          {mediaList.map(media => (
+            <MediaCard key={media.id} media={media} />
+          ))}
+        </div>
+      );
+    };
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+  </script>
+</body>
+</html>
