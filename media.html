@@ -52,21 +52,26 @@
   <h1>In-Flight Entertainment</h1>
   <div id="root"></div>
 
-  <!-- React & Babel CDN -->
   <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-  <!-- Our React App -->
   <script type="text/babel">
-    const MediaCard = ({ media }) => (
+    const MediaCard = ({ media }) => {
+          const defaultImage = "https://via.placeholder.com/280x160?text=No+Image+Available"; 
+return(
       <div className="media-card">
+         <img 
+        src={media.image || defaultImage} 
+        alt={media.title} 
+        style={{ width: "100%", height: "auto", borderRadius: "8px" }} 
+      />
         <h2>{media.title}</h2>
         <p className="type">{media.type.toUpperCase()}</p>
         <p>{media.description}</p>
         <p className="rating">⭐ {media.rating}</p>
       </div>
-    );
+    )};
 
     const App = () => {
       const [mediaList, setMediaList] = React.useState([]);
@@ -74,7 +79,6 @@
       const [error, setError] = React.useState(null);
 
       React.useEffect(() => {
-        // Fetch the JSON file
         fetch('/media.json')
           .then(response => response.json())
           .then(data => {
