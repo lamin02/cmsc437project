@@ -1,4 +1,4 @@
-<!-- NIMAH: PHASE 1 - In-flight portal landing page after login/guest selection -->
+<!-- NIMAH: PHASE 1 & 2 - In-flight portal with live flight info, preferences, and greeting -->
 
 <!DOCTYPE html>
 <head>
@@ -10,19 +10,55 @@
 <h1 id="passenger-greeting">Welcome!</h1>
 <hr>
 
-</div>
-
 <h2>Current Flight Details</h2>
 <ul>
     <li>Assigned Flight: 964</li>
     <li>Final Destination: Rome, Italy</li>
     <li>Estimated Departure: 9:15 PM</li>
     <li>Boarding Gate: A12</li>
-    <!--add ETA?? and maybe where we're flying from and curr time?-->
 </ul>
 
+<!--Live Flight Info -->
+<h2>Live Flight Status</h2>
+<ul>
+    <li>Altitude: <span id="altitude-display">35,000 ft</span></li> <!--may need to change/not hardcode-->
+    <li>Current Location: <span id="location-display">Near Paris</span></li>
+    <li>Estimated Time of Arrival: <span id="eta-display">8:00 AM</span></li>
+</ul>
+
+<img src="map-placeholder.png" alt="Flight Path Map" width="400"> <!-- Placeholder for map-->
+
+<!--Local Time -->
+<h2>Local Times</h2>
+<ul>
+    <li>Departure Local Time: <span id="dep-time"></span></li>
+    <li>Arrival Local Time: <span id="arr-time"></span></li>
+</ul>
+
+<!--User Preferences-->
+<h2>Your Preferences</h2>
+<label for="lang">Language:</label>
+<select id="lang" onchange="saveLang()">
+    <option value="en">English</option>
+    <option value="it">Italian</option>
+    <option value="es">Spanish</option>
+    <option value="ar">Arabic</option>
+    <option value="fr">French</option>
+    <option value="de">German</option>
+    <option value="zh">Chinese</option>
+    <option value="ja">Japanese</option>
+    <option value="ko">Korean</option>
+    <option value="hi">Hindi</option>
+    <option value="pt">Portuguese</option>
+    <option value="ru">Russian</option>
+</select>
+
+<label for="volume">Volume:</label>
+<input type="range" id="volume" min="0" max="100" onchange="saveVolume()">
+
+<!-- JSON -->
 <script>
-// Determine passenger type and show greeting depending if guest or flyer that already has a membership w airline
+    // Session-based welcome
     const boardingPassType = localStorage.getItem("boardingPassType"); 
     const greetingBanner = document.getElementById("passenger-greeting");
 
@@ -35,6 +71,37 @@
     else {
         greetingBanner.textContent = "Welcome aboard!";
     }
+
+    // Local time calculation
+    const departureTime = new Date();
+    const arrivalTime = new Date(Date.now() + 5 * 60 * 60 * 1000); // 5 hours ahead of BWI
+
+    document.getElementById("dep-time").textContent = departureTime.toLocaleTimeString();
+    document.getElementById("arr-time").textContent = arrivalTime.toLocaleTimeString();
+
+    // User preferences saving
+    function saveLang() {
+        const selectedLang = document.getElementById("lang").value;
+        localStorage.setItem("preferredLang", selectedLang);
+    }
+
+    function saveVolume() {
+        const selectedVolume = document.getElementById("volume").value;
+        localStorage.setItem("preferredVolume", selectedVolume);
+    }
+
+    // Restore preferences
+    document.addEventListener("DOMContentLoaded", () => {
+        const lang = localStorage.getItem("preferredLang");
+        const vol = localStorage.getItem("preferredVolume");
+
+        if (lang) {
+            document.getElementById("lang").value = lang;
+        }
+        if (vol) {
+            document.getElementById("volume").value = vol;
+        }
+    });
 </script>
 
 </body>
