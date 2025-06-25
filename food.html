@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>🍽️ In-Flight Dining</title>
+    <link rel="stylesheet" href="food.css">
+</head>
+<body>
+
+    <h1>🍴 In-Flight Food & Beverage Service</h1>
+    <hr>
+
+    <div class="food-container">
+        <div id="menu-items" class="menu-items"></div>
+        <div class="order-box">
+            <h3>Your Meal Tray</h3>
+            <ul id="order-list"></ul>
+            <p id="order-total">Total: $0.00</p>
+            <input type="text" id="card-number" placeholder="Enter Credit Card #" />
+            <button onclick="submitOrder()">Place Order</button>
+            <div id="order-status" class="status-msg"></div>
+        </div>
+    </div>
+
+    <script src="food.js"></script>
+</body>
+</html>
