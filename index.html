@@ -137,6 +137,35 @@ body {
   transform: scale(1.1);
 }
 
+/* feedback form stuff */
+.feedback-form {
+  margin: 40px auto;
+  width: 300px;
+  background-color: #fff8dc;
+  padding: 20px;
+  border-radius: 8px;
+  border: 2px solid black;
+}
+.phone-call-form {
+  margin: 40px auto;
+  width: 280px;
+  background-color: #eef;
+  padding: 20px;
+  border: 2px solid navy;
+  border-radius: 8px;
+}
+.announcement-panel {
+  margin: 30px;
+  background-color: #fff;
+  border: 2px dashed #555;
+  padding: 15px;
+  border-radius: 8px;
+  max-width: 500px;
+}
+
+
+
+
 
 </style>
 
@@ -146,17 +175,61 @@ body {
     <button class="nav" onclick="handleGuest()">Guest</button>
 </div>
 <!-- LEHBAH - SideBar stuff-->
- <div class="sidebar">
-    <a href="call.html" title="Make a Phone Call">
-        <img src="phoneCall.png" class="icon-button" alt="Phone Call">
-    </a>
-    <a href="attendant.html" title="Call Flight Attendant">
-        <img src="flightAttendant.png" class="icon-button" alt="Flight Attendant">
-    </a>
-    <a href="feedback.html" title="Submit Feedback">
-        <img src="feedBackIcon.png" class="icon-button" alt="Feedback">
-    </a>
+<div class="sidebar">
+  <a href="#" onclick="showSection('call-section')" title="Make a Phone Call">
+    <img src="phoneCall.png" class="icon-button" alt="Phone Call">
+  </a>
+  <a href="#" onclick="showSection('attendant-section')" title="Call Flight Attendant">
+    <img src="flightAttendant.png" class="icon-button" alt="Flight Attendant">
+  </a>
+  <a href="#" onclick="showSection('feedback-section')" title="Submit Feedback">
+    <img src="feedBackIcon.png" class="icon-button" alt="Feedback">
+  </a>
 </div>
+
+<!-- SIDEBAR SECTION: FEEDBACK -->
+<div id="feedback-section" class="sidebar-section" style="display: none;">
+  <div class="feedback-form">
+    <h3>Report an Issue / Leave Feedback</h3>
+    <form onsubmit="submitFeedback(event)">
+      <label for="feedback-type">Type:</label>
+      <select id="feedback-type">
+        <option>Bug</option>
+        <option>Suggestion</option>
+        <option>Other</option>
+      </select><br><br>
+
+      <label for="feedback-msg">Message:</label><br>
+      <textarea id="feedback-msg" rows="4" cols="30" placeholder="Write here..."></textarea><br><br>
+
+      <button type="submit">Submit</button>
+      <p id="feedback-confirm" style="color: green;"></p>
+    </form>
+  </div>
+</div>
+
+<!-- SIDEBAR SECTION: CALL -->
+<div id="call-section" class="sidebar-section" style="display: none;">
+  <div class="phone-call-form">
+    <h3>Make a Phone Call</h3>
+    <form onsubmit="alert('Connecting... (mock)'); return false;">
+      <label for="number">Enter Number:</label><br>
+      <input type="tel" id="number" placeholder="+1-202-555-0182"><br><br>
+      <button type="submit">Call</button>
+    </form>
+  </div>
+</div>
+
+<!-- SIDEBAR SECTION: ATTENDANT -->
+<div id="attendant-section" class="sidebar-section" style="display: none;">
+  <div style="text-align: center; margin-top: 40px;">
+    <h3>Call Flight Attendant</h3>
+    <p>A flight attendant has been notified. Thank you for your patience.</p>
+  </div>
+</div>
+
+
+
  <!-- This is the media page stuff -->
   <div class="media-launch">
     <a href="media.html">
@@ -176,19 +249,63 @@ body {
   </a>
 </div>
 
+<!-- Announcement/messafes for Deaf Users-->
+ <div class="announcement-panel">
+  <h3>Announcements</h3>
+  <ul>
+    <li>🛫 Welcome aboard! We’re scheduled to depart at 9:15 PM.</li>
+    <li>☕ Snack service begins in 15 minutes.</li>
+    <li>🎬 Movies available in the Media section.</li>
+  </ul>
+</div>
+
 
 
 
 <script>
-    function handleLogin() {
-        localStorage.setItem("boardingPassType", "verified-traveler");
-        window.location.href = "homepage.html";
+  function handleLogin() {
+    localStorage.setItem("boardingPassType", "verified-traveler");
+    window.location.href = "homepage.html";
+  }
+
+  function handleGuest() {
+    localStorage.setItem("boardingPassType", "explorer-guest");
+    window.location.href = "homepage.html";
+  }
+
+  function submitFeedback(event) {
+    event.preventDefault();
+    const msg = document.getElementById("feedback-msg").value;
+    document.getElementById("feedback-confirm").textContent = "Thank you for your feedback!";
+    console.log("Feedback submitted:", msg);
+  }
+
+  let currentlyOpenId = null;
+
+  function showSection(id) {
+    const selected = document.getElementById(id);
+
+    // If the clicked section is already open, close it
+    if (currentlyOpenId === id && selected.style.display === 'block') {
+      selected.style.display = 'none';
+      currentlyOpenId = null;
+      return;
     }
 
-    function handleGuest() {
-        localStorage.setItem("boardingPassType", "explorer-guest");
-        window.location.href = "homepage.html";
+    // Close all sections first
+    document.querySelectorAll('.sidebar-section').forEach(div => {
+      div.style.display = 'none';
+    });
+
+    // Open the selected one
+    if (selected) {
+      selected.style.display = 'block';
+      selected.scrollIntoView({ behavior: 'smooth' });
+      currentlyOpenId = id;
     }
-  </script>
+  }
+</script>
+
+  
 
 </body> 

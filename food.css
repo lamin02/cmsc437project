@@ -1,0 +1,93 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f5f1e9; /* beig */
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    font-size: 26px;
+}
+
+hr {
+    margin-bottom: 30px;
+    border: none;
+    border-top: 2px solid #ccc;
+}
+
+.food-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.menu-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    flex: 3;
+}
+
+.menu-card {
+    background-color: white;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    width: 220px;
+    text-align: center;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
+}
+
+.menu-card img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.menu-card button {
+    background-color: #008cba;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.menu-card button:hover {
+    background-color: #00729a;
+}
+
+.order-box {
+    flex: 1;
+    background-color: #fff9e6;
+    border: 1px solid #e2cfa0;
+    border-radius: 10px;
+    padding: 20px;
+    min-width: 220px;
+    height: fit-content;
+}
+
+.order-box h3 {
+    margin-top: 0;
+}
+
+#card-number {
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.order-box button {
+    background-color: #008cba;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.status-msg {
+    margin-top: 10px;
+    font-weight: bold;
+    color: green;
+}
