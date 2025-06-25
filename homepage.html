@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>In-Flight Homepage</title>
 
-    <!-- Leaflet.js for map - formatting) -->
+    <!-- Leaflet.js integration (researched this for how to integrate interactive map) -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
@@ -31,15 +31,15 @@
     <li>Boarding Gate: A12</li>
 </ul>
 
-<!--Flight -->
+<!-- Live Flight Info -->
 <h2>Live Flight Stats</h2>
 <ul>
     <li>Altitude: <span id="altitude-display">35,000 ft</span></li>
-    <li>Current Location: <span id="location-display">Descending into Rome</span></li>
-    <li>Estimated Time of Arrival: <span id="eta-display">11:31 PM</span></li>
+    <li>Current Location: <span id="location-display">Near Rome</span></li>
+    <li>Estimated Time of Arrival: <span id="eta-display">11:30 PM</span></li>
 </ul>
 
-<!-- Map  -->
+<!-- Interactive Map -->
 <h2>Flight Location Map</h2>
 <div id="flight-map"></div>
 
@@ -50,7 +50,7 @@
     <li>Arrival Local Time: <span id="arr-time"></span></li>
 </ul>
 
-<!-- User Language Preferences -->
+<!--Preferences -->
 <h2>Your Preferences</h2>
 <label for="lang">Language:</label>
 <select id="lang" onchange="saveLang()">
@@ -71,7 +71,7 @@
 <label for="volume">Volume:</label>
 <input type="range" id="volume" min="0" max="100" onchange="saveVolume()">
 
-<!-- JSON Session, Time, Preferences, and Map -->
+<!-- JSON implementation -->
 <script>
     // Session-based welcome
     const boardingPassType = localStorage.getItem("boardingPassType"); 
@@ -116,14 +116,14 @@
             document.getElementById("volume").value = vol;
         }
 
-        // Usage of leaflet map
+        // Initialize Leaflet map (researched on how to integrate - recommended me leaflet)
         const map = L.map('flight-map').setView([41.9028, 12.4964], 6); // Rome coordinates
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
 
-        L.marker([41.9028, 12.4964]).addTo(map) // map markup
-            .bindPopup('Descending into Rome')
+        L.marker([41.9028, 12.4964]).addTo(map)
+            .bindPopup('Descending into Rome') // leaflet attribute, allows a little window to pop up
             .openPopup();
     });
 </script>
