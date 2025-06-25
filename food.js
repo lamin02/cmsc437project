@@ -52,7 +52,7 @@ function updateOrder() {
 
     orderTotal.textContent = `Total: $${total.toFixed(2)}`;
 }
-
+//hi
 function submitOrder() {
     const cardNumber = document.getElementById("card-number").value;
 
