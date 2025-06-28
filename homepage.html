@@ -125,6 +125,30 @@
         L.marker([41.9028, 12.4964]).addTo(map)
             .bindPopup('Descending into Rome') // leaflet attribute, allows a little window to pop up
             .openPopup();
+
+        // Phase 3 - Auto session redirect if no role saved
+        if (!boardingPassType) {
+        alert("No active session. Please log in again.");
+        window.location.href = "index.html"; // send back to login
+    }
+
+    // Phase 3 - Session timeout
+    let inactivityTimer;
+
+    function resetSessionClock() {
+        clearTimeout(inactivityTimer);
+        inactivityTimer = setTimeout(() => {
+            alert("Session timed out due to inactivity.");
+            localStorage.removeItem("boardingPassType"); 
+            window.location.href = "index.html"; // send back to login
+        }, 10 * 60 * 1000); // 10 min mult. by 60 and 10000 for minute calculation
+    }
+
+    // Start timer and reset it on any activity
+    resetSessionClock();
+    document.onclick = resetSessionClock;
+    document.onmousemove = resetSessionClock;
+    document.onkeydown = resetSessionClock;
     });
 </script>
 
