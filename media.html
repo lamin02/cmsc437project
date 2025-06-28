@@ -45,6 +45,90 @@
       font-weight: bold;
       color: #ff9900;
     }
+
+    button {
+      cursor: pointer;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      background-color: #0077cc;
+      color: white;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .trending, .destination, .favorites {
+      margin: 32px 0;
+      padding: 16px;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .trending h2, .destination h2, .favorites h2 {
+      margin-top: 0;
+      color: #0077cc;
+    }
+
+    .favorites {
+      border: 1px solid #ff9900;
+      background: #fffbe6;
+    }
+
+    /* Now Playing Overlay */
+    .now-playing {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .now-playing-content {
+      background: #fff;
+      border-radius: 12px;
+      padding: 32px;
+      min-width: 320px;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 4px 24px #0003;
+    }
+
+    .now-playing img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 16px;
+    }
+
+    .search-bar {
+      margin: 24px 0;
+      text-align: center;
+    }
+
+    .search-bar input {
+      padding: 8px 16px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      width: 60%;
+      max-width: 320px;
+      font-size: 1rem;
+    }
   </style>
 </head>
 <body>
@@ -57,29 +141,117 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
   <script type="text/babel">
-    const MediaCard = ({ media }) => {
-          const defaultImage = "https://via.placeholder.com/280x160?text=No+Image+Available"; 
-return(
-      <div className="media-card">
-         <img 
-        src={media.image || defaultImage} 
-        alt={media.title} 
-        style={{ width: "100%", height: "auto", borderRadius: "8px" }} 
-      />
-        <h2>{media.title}</h2>
-        <p className="type">{media.type.toUpperCase()}</p>
-        <p>{media.description}</p>
-        <p className="rating">⭐ {media.rating}</p>
+    const NowPlaying = ({ media, onClose }) => (
+      <div className="now-playing">
+        <div className="now-playing-content">
+          <img src={media.image || 'https://via.placeholder.com/280x160?text=No+Image+Available'} alt={media.title} />
+          <h2>{media.title}</h2>
+          <p className="type">{media.type.toUpperCase()}</p>
+          <p>{media.description}</p>
+          <p className="rating">⭐ {media.rating}</p>
+          <div style={{margin:'16px 0'}}>
+            <button style={{background:'#0077cc', color:'#fff', marginRight:8}}>⏯️ Play</button>
+            <button style={{background:'#eee', color:'#333'}} onClick={onClose}>Close</button>
+          </div>
+          <div style={{marginTop:16, fontSize:'0.95em', color:'#888'}}>Now Playing : {media.title}</div>
+        </div>
       </div>
-    )};
+    );
+
+    const MediaCard = ({ media, onFavorite, isFavorited, onPlay }) => {
+      let imageUrl = "https://via.placeholder.com/280x160?text=No+Image+Available";
+      if (media.image2 && media.image2.trim() !== "") {
+        imageUrl = media.image2;
+      } else if (media.image && media.image.trim() !== "") {
+        imageUrl = media.image;
+      }
+      return (
+        <div className="media-card">
+          <img
+            src={imageUrl}
+            alt={media.title}
+            style={{ width: "100%", height: "auto", borderRadius: "8px" }}
+          />
+          <h2>{media.title}</h2>
+          <p className="type">{media.type.toUpperCase()}</p>
+          <p>{media.description}</p>
+          <p className="rating">⭐ {media.rating}</p>
+          <button onClick={() => onFavorite(media)} style={{marginTop: '8px'}}>
+            {isFavorited ? '★ Bookmarked' : '☆ Bookmark'}
+          </button>
+          <button onClick={() => onPlay(media)} style={{marginTop: '8px', marginLeft: '8px', background:'#28a745'}}>
+            ▶️ Play
+          </button>
+        </div>
+      );
+    };
+
+    const SearchBar = ({ value, onChange }) => (
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Search or filter media..."
+          value={value}
+          onChange={e => onChange(e.target.value)}
+        />
+      </div>
+    );
+
+    const TrendingPlaylists = () => (
+      <div className="trending">
+        <h2>Trending Playlists</h2>
+        <ul>
+          <li>🎵 Top 10 Pop Hits</li>
+          <li>🎬 Award-Winning Movies</li>
+          <li>🎧 Relaxing Instrumentals</li>
+          <li>😂 Comedy Specials</li>
+        </ul>
+      </div>
+    );
+
+    const DestinationGuide = () => (
+      <div className="destination">
+        <h2>Arrival City Guide: Rome</h2>
+        <ul>
+          <li>🏛️ Colosseum: Explore ancient Roman history!</li>
+          <li>🍝 Best Eats: Try authentic pasta at Trastevere.</li>
+          <li>🎨 Vatican Museums: See the Sistine Chapel.</li>
+          <li>🚌 Transit Tips: Use Metro Line A for main attractions.</li>
+        </ul>
+      </div>
+    );
+
+    const FavoritesSection = ({ favorites, onRemove }) => (
+      favorites.length === 0 ? null : (
+        <div className="favorites">
+          <h2>Your Bookmarks</h2>
+          <ul>
+            {favorites.map(media => (
+              <li key={media.id}>
+                {media.title}
+                <button style={{marginLeft: '10px', background: '#ff6666'}} onClick={() => onRemove(media.id)}>
+                  Remove
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    );
 
     const App = () => {
       const [mediaList, setMediaList] = React.useState([]);
       const [loading, setLoading] = React.useState(true);
       const [error, setError] = React.useState(null);
+      const [favorites, setFavorites] = React.useState(() => {
+        const saved = localStorage.getItem('mediaFavorites');
+        return saved ? JSON.parse(saved) : [];
+      });
+      const [nowPlaying, setNowPlaying] = React.useState(null);
+      const [search, setSearch] = React.useState('');
 
       React.useEffect(() => {
-        fetch('/media.json')
+        fetch('media.json')
           .then(response => response.json())
           .then(data => {
             setMediaList(data);
@@ -91,14 +263,65 @@ return(
           });
       }, []);
 
+      React.useEffect(() => {
+        localStorage.setItem('mediaFavorites', JSON.stringify(favorites));
+      }, [favorites]);
+
+      const handleFavorite = (media) => {
+        setFavorites(prev => {
+          if (prev.find(fav => fav.id === media.id)) return prev;
+          return [...prev, media];
+        });
+      };
+
+      const handleRemoveFavorite = (id) => {
+        setFavorites(prev => prev.filter(fav => fav.id !== id));
+      };
+
+      const handlePlay = (media) => {
+        setNowPlaying(media);
+      };
+
+      const handleCloseNowPlaying = () => {
+        setNowPlaying(null);
+      };
+
+      const filteredMedia = search.trim() === ''
+        ? mediaList
+        : mediaList.filter(m =>
+            m.title.toLowerCase().includes(search.toLowerCase()) ||
+            m.type.toLowerCase().includes(search.toLowerCase()) ||
+            (m.description && m.description.toLowerCase().includes(search.toLowerCase()))
+          );
+
+      const seen = new Set();
+      const uniqueFilteredMedia = filteredMedia.filter(m => {
+        if (seen.has(m.id)) return false;
+        seen.add(m.id);
+        return true;
+      });
+
       if (loading) return <div>Loading...</div>;
       if (error) return <div>{error}</div>;
 
       return (
-        <div className="media-grid">
-          {mediaList.map(media => (
-            <MediaCard key={media.id} media={media} />
-          ))}
+        <div>
+          {nowPlaying && <NowPlaying media={nowPlaying} onClose={handleCloseNowPlaying} />}
+          <SearchBar value={search} onChange={setSearch} />
+          <FavoritesSection favorites={favorites} onRemove={handleRemoveFavorite} />
+          <TrendingPlaylists />
+          <DestinationGuide />
+          <div className="media-grid">
+            {uniqueFilteredMedia.map(media => (
+              <MediaCard
+                key={media.id}
+                media={media}
+                onFavorite={handleFavorite}
+                isFavorited={!!favorites.find(fav => fav.id === media.id)}
+                onPlay={handlePlay}
+              />
+            ))}
+          </div>
         </div>
       );
     };

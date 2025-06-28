@@ -1,72 +1,276 @@
 [
+    
     {
-        "id": 1,
+        "id": 35,
         "type": "music",
-        "title": "Voyage",
-        "description": "ABBA's comeback album, marking their return to music after 40 years.",
-        "rating": "8.7"
+        "title": "Blonde",
+        "description": "Frank Ocean's critically acclaimed R&B album.",
+        "rating": "9.0",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/Blonde_-_Frank_Ocean.jpeg"
+    },
+  
+    {
+        "id": 37,
+        "type": "music",
+        "title": "Currents",
+        "description": "Tame Impala's psychedelic pop record.",
+        "rating": "8.7",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/Tame_Impala_-_Currents.png"
+    },
+ 
+  
+   
+    {
+        "id": 40,
+        "type": "music",
+        "title": "Divide",
+        "description": "Ed Sheeran's chart-topping pop album.",
+        "rating": "8.3",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/Divide_cover.png"
+    },
+    {
+        "id": 72,
+        "type": "music",
+        "title": "Happier Than Ever",
+        "description": "Billie Eilish's introspective sophomore album.",
+        "rating": "8.6",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/Billie_Eilish_-_Happier_Than_Ever.png"
+    },
+ 
+   
+    {
+        "id": 71,
+        "type": "music",
+        "title": "Evermore",
+        "description": "Taylor Swift's indie-folk follow-up to Folklore.",
+        "rating": "8.8",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/Taylor_Swift_-_Evermore.png"
+    },
+    {
+        "id": 19,
+        "type": "music",
+        "title": "Fine Line",
+        "description": "Harry Styles' genre-spanning pop album.",
+        "rating": "8.5",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/Harry_Styles_-_Fine_Line.png"
+    },
+ 
+    
+    {
+        "id": 17,
+        "type": "music",
+        "title": "Future Nostalgia",
+        "description": "Dua Lipa's disco-pop revival.",
+        "rating": "8.6",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/Dua_Lipa_-_Future_Nostalgia.png"
+    },
+ 
+    {
+        "id": 4,
+        "type": "music",
+        "title": "Golden Hour",
+        "description": "Kacey Musgraves' country-pop masterpiece, filled with emotional depth and melodies.",
+        "rating": "8.8",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/Kacey_Musgraves_-_Golden_Hour.png"
+    },
+  
+   
+    {
+        "id": 56,
+        "type": "music",
+        "title": "Lover",
+        "description": "Taylor Swift's romantic pop album.",
+        "rating": "8.5",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/Taylor_Swift_-_Lover.png"
+    },
+ 
+    {
+        "id": 16,
+        "type": "music",
+        "title": "Melodrama",
+        "description": "Lorde's critically acclaimed sophomore album.",
+        "rating": "8.7",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/Lorde_-_Melodrama.png"
+    },
+    {
+        "id": 73,
+        "type": "music",
+        "title": "Montero",
+        "description": "Lil Nas X's bold and genre-defying debut.",
+        "rating": "8.3",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/Lil_Nas_X_-_Montero.png"
+    },
+
+    {
+        "id": 53,
+        "type": "music",
+        "title": "SOUR",
+        "description": "Olivia Rodrigo's breakout debut album.",
+        "rating": "8.7",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/Olivia_Rodrigo_-_SOUR.png"
+    },
+    
+   
+    
+    {
+        "id": 34,
+        "type": "music",
+        "title": "Starboy",
+        "description": "The Weeknd's genre-blending pop album.",
+        "rating": "8.4",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/The_Weeknd_-_Starboy.png"
+    },
+ 
+  
+    {
+        "id": 39,
+        "type": "music",
+        "title": "Reputation",
+        "description": "Taylor Swift's darker, edgier pop album.",
+        "rating": "8.1",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/Taylor_Swift_-_Reputation.png"
+    },
+    {
+        "id": 51,
+        "type": "music",
+        "title": "Red (Taylor's Version)",
+        "description": "Taylor Swift's re-recorded pop-country classic.",
+        "rating": "9.0",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/Taylor_Swift_-_Red_(Taylor's_Version).png"
     },
     {
         "id": 2,
         "type": "music",
         "title": "Folklore",
         "description": "Taylor Swift's introspective indie-folk album, full of storytelling and nostalgia.",
-        "rating": "9.0"
+        "rating": "9.0",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/Taylor_Swift_-_Folklore.png"
     },
     {
-        "id": 3,
+        "id": 36,
         "type": "music",
-        "title": "When We All Fall Asleep, Where Do We Go?",
-        "description": "Billie Eilish's debut album, blending dark pop with haunting melodies.",
-        "rating": "8.5"
+        "title": "Anti",
+        "description": "Rihanna's bold and experimental pop album.",
+        "rating": "8.5",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/Rihanna_-_Anti.png"
     },
     {
-        "id": 4,
+        "id": 58,
         "type": "music",
-        "title": "Golden Hour",
-        "description": "Kacey Musgraves' country-pop masterpiece, filled with emotional depth and melodies.",
-        "rating": "8.8"
+        "title": "Views",
+        "description": "Drake's Toronto-inspired album.",
+        "rating": "8.1",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/Drake_-_Views_cover.jpg"
+    },
+ 
+    {
+        "id": 1,
+        "type": "music",
+        "title": "Voyage",
+        "description": "ABBA's comeback album, marking their return to music after 40 years.",
+        "rating": "8.7",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/ABBA_-_Voyage.png"
+    },
+    {
+        "id": 60,
+        "type": "music",
+        "title": "X",
+        "description": "Ed Sheeran's hit-filled sophomore album.",
+        "rating": "8.4",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/X_cover.png"
     },
     {
         "id": 5,
         "type": "music",
         "title": "25",
         "description": "Adele's emotional return to the music scene, with ballads that capture the essence of heartbreak.",
-        "rating": "9.1"
-    },
-     {
-        "id": 1,
-        "type": "movie",
-        "title": "Everything Everywhere All at Once",
-        "description": "A sci-fi adventure exploring the multiverse, identity, and family.",
-        "rating": "8.0"
+        "rating": "9.1",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/Adele_-_25_(Official_Album_Cover).png"
     },
     {
-        "id": 2,
-        "type": "movie",
-        "title": "CODA",
-        "description": "A touching story of a deaf family and the only hearing member's dreams of becoming a singer.",
-        "rating": "8.1"
+        "id": 14,
+        "type": "music",
+        "title": "1989",
+        "description": "Taylor Swift's pop reinvention.",
+        "rating": "8.8",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/Taylor_Swift_-_1989.png"
     },
     {
-        "id": 3,
-        "type": "movie",
-        "title": "Nomadland",
-        "description": "A moving portrayal of a woman embracing a nomadic lifestyle after the collapse of her town’s economy.",
-        "rating": "7.9"
+        "id": 18,
+        "type": "music",
+        "title": "After Hours",
+        "description": "The Weeknd's synth-heavy, moody pop album.",
+        "rating": "8.8",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/The_Weeknd_-_After_Hours.png"
     },
     {
-        "id": 4,
+        "id": 12,
+        "type": "music",
+        "title": "Lemonade",
+        "description": "Beyoncé's genre-blending visual album.",
+        "rating": "9.3",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/Beyonce_-_Lemonade_(Official_Album_Cover).png"
+    },
+    {
+        "id": 31,
+        "type": "music",
+        "title": "Invasion of Privacy",
+        "description": "Cardi B's Grammy-winning debut album.",
+        "rating": "8.2",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/Cardi_B_-_Invasion_of_Privacy.png"
+    },
+   
+    {
+        "id": 44,
+        "type": "movie",
+        "title": "The Grand Budapest Hotel",
+        "description": "Wes Anderson's whimsical comedy.",
+        "rating": "8.1",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/The_Grand_Budapest_Hotel.png"
+    },
+    
+    {
+        "id": 87,
+        "type": "movie",
+        "title": "Room",
+        "description": "A mother and son's escape from captivity.",
+        "rating": "8.1",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/Room_(2015_film).png"
+    },
+    
+    {
+        "id": 65,
+        "type": "movie",
+        "title": "The Irishman",
+        "description": "Martin Scorsese's crime epic.",
+        "rating": "7.8",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/The_Irishman.png"
+    },
+   
+    {
+        "id": 89,
+        "type": "movie",
+        "title": "The Imitation Game",
+        "description": "The story of Alan Turing and codebreaking.",
+        "rating": "8.0",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/The_Imitation_Game.png"
+    },
+   
+    {
+        "id": 9,
         "type": "movie",
         "title": "Parasite",
         "description": "A South Korean dark comedy-thriller exploring class struggle in modern society.",
-        "rating": "8.6"
+        "rating": "8.6",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/Parasite_(2019_film).png"
     },
+    
     {
-        "id": 5,
+        "id": 82,
         "type": "movie",
-        "title": "The Shape of Water",
-        "description": "A unique love story between a mute woman and a mysterious aquatic creature.",
-        "rating": "7.3"
+        "title": "The Favourite",
+        "description": "A darkly comic period drama.",
+        "rating": "7.6",
+        "image": "https://en.wikipedia.org/wiki/Special:FilePath/The_Favourite.png"
     }
 ]
