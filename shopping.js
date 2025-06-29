@@ -35,13 +35,14 @@ function addToCart(id) {
     const existing = cart.find(item => item.id === id);
 
     if (existing) {
-        existing.quantity++;
+        existing.qty++;
     } else {
-        cart.push({ ...product, quantity: 1 });
+        cart.push({ ...product, qty: 1 });  // ✅ FIXED: add qty when first added
     }
 
     updateCart();
 }
+
 
 function removeFromCart(id) {
     cart = cart.filter(item => item.id !== id);
@@ -53,15 +54,31 @@ function updateCart() {
     let total = 0;
 
     cart.forEach(item => {
-        total += item.price * item.quantity;
+        total += item.price * item.qty; // FIXED here
 
         const li = document.createElement("li");
-        li.textContent = `${item.name} x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}`;
+        li.textContent = `${item.name} x${item.qty} - $${(item.price * item.qty).toFixed(2)}`; // FIXED here
         li.innerHTML += ` <button onclick="removeFromCart(${item.id})">Remove</button>`;
         cartItems.appendChild(li);
     });
 
     totalPrice.textContent = `Total: $${total.toFixed(2)}`;
 }
+
+function completePurchase() {
+    const cardNumber = document.getElementById("shop-card").value;
+    const status = document.getElementById("shop-status");
+
+    if (!cardNumber || cardNumber.length < 10) {
+        status.style.color = "red";
+        status.textContent = "Please enter a valid credit card number.";
+        return;
+    }
+
+    localStorage.setItem("latestOrder", JSON.stringify(cart));
+    localStorage.setItem("lastCardUsed", cardNumber);
+    window.location.href = "receipt.html";
+}
+
 
 renderProducts();
