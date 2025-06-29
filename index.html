@@ -1,19 +1,20 @@
 <!DOCTYPE> 
 <head> 
     <meta charset="UTF-8">
-    <title> In Flight System </title> 
-</head>
+    <!-- Leaflet.js for Interactive Map -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-<body>
-
-
-<h1>Welcome Aboard Your Digital In-Flight System</h1>
-<hr> 
-
+    <title> In Flight System 
+    </title> 
+<!-- ALL STYLING STUFF GOES HERE -->
 <style>
-    body {
-        background-color: lightgray; 
-    }
+   body {
+    background-color: lightgray;
+    padding-right: 180px; 
+    margin: 0; 
+    overflow-x: hidden; 
+}
     h1 {
         text-align: center; 
     }
@@ -44,8 +45,6 @@
     text-align: center;
     z-index: 10;
 }
-
-
 .button-box button {
     display: block;
     margin: 10px auto;
@@ -55,7 +54,6 @@
         text-align: center;
         margin-top: 20px;
     }
-
     /* LEHBAH - SideBar CSS Styling*/
     .sidebar {
     position: fixed;
@@ -71,34 +69,24 @@
     padding-top: 100px;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
 }
-
 .icon-button {
     margin: 20px 0;
     width: 60px;
     height: 60px;
     cursor: pointer;
 }
-
 .icon-button:hover {
     transform: scale(1.1);
 }
-
-body {
-    background-color: lightgray;
-    padding-right: 180px; /* Prevent content from hiding behind sidebar */
-}
-
 /*Media & Movie*/ 
 .media-launch {
     text-align: center;
     margin: 60px auto;
 }
-
 .media-launch a {
     text-decoration: none;
     color: black;
 }
-
 .media-icon {
     width: 120px;
     height: 120px;
@@ -108,7 +96,6 @@ body {
     padding: 10px;
     transition: transform 0.3s ease;
 }
-
 .media-icon:hover {
     transform: scale(1.1);
 }
@@ -117,12 +104,10 @@ body {
   text-align: center;
   margin: 60px auto;
 }
-
 .shopping-launch a {
   text-decoration: none;
   color: black;
 }
-
 .shopping-icon {
   width: 120px;
   height: 120px;
@@ -132,11 +117,9 @@ body {
   padding: 10px;
   transition: transform 0.3s ease;
 }
-
 .shopping-icon:hover {
   transform: scale(1.1);
 }
-
 /* feedback form stuff */
 .feedback-form {
   margin: 40px auto;
@@ -162,18 +145,93 @@ body {
   border-radius: 8px;
   max-width: 500px;
 }
-
-
-
-
-
 </style>
+</head>
 
+<body>
 <br><br>
 <div class="button-box">
     <button class="nav" onclick="handleLogin()">Login</button><br>
     <button class="nav" onclick="handleGuest()">Guest</button>
 </div>
+
+<h1>Welcome Aboard Your Digital In-Flight System</h1>
+<hr> 
+<!-- Live Flight Dashboard Section -->
+<!-- Two-column layout -->
+<div style="display: flex; flex-direction: row; justify-content: space-between; padding: 40px;">
+  <!-- LEFT COLUMN -->
+  <div style="flex: 1; padding-right: 40px;">
+
+    <h2>Current Flight Details</h2>
+    <ul>
+        <li>Assigned Flight: 964</li>
+        <li>Final Destination: Rome, Italy</li>
+        <li>Estimated Departure: 9:15 PM</li>
+        <li>Boarding Gate: A12</li>
+    </ul>
+
+    <h2>Live Flight Stats</h2>
+    <ul>
+        <li>Altitude: <span id="altitude-display">35,000 ft</span></li>
+        <li>Current Location: <span id="location-display">Near Rome</span></li>
+        <li>Estimated Time of Arrival: <span id="eta-display">11:30 PM</span></li>
+    </ul>
+
+    <h2>Flight Location Map</h2>
+    <div id="flight-map" style="height: 300px; width: 100%; max-width: 500px; border: 2px solid #333;"></div>
+
+    <h2>Local Times</h2>
+    <ul>
+        <li>Departure Local Time: <span id="dep-time"></span></li>
+        <li>Arrival Local Time: <span id="arr-time"></span></li>
+    </ul>
+
+    <h2>Your Preferences</h2>
+    <label for="lang">Language:</label>
+    <select id="lang" onchange="saveLang()">
+      <option value="en">English</option>
+      <option value="ar">Arabic</option>
+      <option value="fr">French</option>
+      <option value="it">Italian</option>
+      <option value="es">Spanish</option>
+      <option value="de">German</option>
+      <option value="zh">Chinese</option>
+      <option value="ja">Japanese</option>
+      <option value="ko">Korean</option>
+      <option value="hi">Hindi</option>
+      <option value="pt">Portuguese</option>
+      <option value="ru">Russian</option>
+    </select>
+
+    <label for="volume">Volume:</label>
+    <input type="range" id="volume" min="0" max="100" onchange="saveVolume()">
+
+  </div>
+  <!-- RIGHT COLUMN -->
+  <div style="flex: 0.6; display: flex; flex-direction: column; align-items: center; gap: 40px; margin-top: 140px;">
+
+    <!-- Media -->
+    <div class="media-launch">
+      <a href="media.html">
+          <img src="https://cdn-icons-png.flaticon.com/512/727/727245.png" 
+               alt="Movies" 
+               class="media-icon">
+          <p>In-Flight Entertainment</p>
+      </a>
+    </div>
+    <!-- Shopping -->
+    <div class="shopping-launch">
+      <a href="shopping.html">
+        <img src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png"
+             alt="Shopping"
+             class="shopping-icon">
+        <p>Duty-Free Shopping</p>
+      </a>
+    </div>
+  </div>
+</div>
+
 <!-- LEHBAH - SideBar stuff-->
 <div class="sidebar">
   <a href="#" onclick="showSection('call-section')" title="Make a Phone Call">
@@ -186,7 +244,6 @@ body {
     <img src="feedBackIcon.png" class="icon-button" alt="Feedback">
   </a>
 </div>
-
 <!-- SIDEBAR SECTION: FEEDBACK -->
 <div id="feedback-section" class="sidebar-section" style="display: none;">
   <div class="feedback-form">
@@ -207,7 +264,6 @@ body {
     </form>
   </div>
 </div>
-
 <!-- SIDEBAR SECTION: CALL -->
 <div id="call-section" class="sidebar-section" style="display: none;">
   <div class="phone-call-form">
@@ -219,7 +275,6 @@ body {
     </form>
   </div>
 </div>
-
 <!-- SIDEBAR SECTION: ATTENDANT -->
 <div id="attendant-section" class="sidebar-section" style="display: none;">
   <div style="text-align: center; margin-top: 40px;">
@@ -227,28 +282,6 @@ body {
     <p>A flight attendant has been notified. Thank you for your patience.</p>
   </div>
 </div>
-
-
-
- <!-- This is the media page stuff -->
-  <div class="media-launch">
-    <a href="media.html">
-        <img src="https://cdn-icons-png.flaticon.com/512/727/727245.png" 
-             alt="Movies" 
-             class="media-icon">
-        <p>In-Flight Entertainment</p>
-    </a>
-</div>
-<!-- This is the shopping page stuff -->
- <div class="shopping-launch">
-  <a href="shopping.html">
-    <img src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png"
-         alt="Shopping"
-         class="shopping-icon">
-    <p>Duty-Free Shopping</p>
-  </a>
-</div>
-
 <!-- Announcement/messafes for Deaf Users-->
  <div class="announcement-panel">
   <h3>Announcements</h3>
@@ -259,19 +292,7 @@ body {
   </ul>
 </div>
 
-
-
-
 <script>
-  function handleLogin() {
-    localStorage.setItem("boardingPassType", "verified-traveler");
-    window.location.href = "homepage.html";
-  }
-
-  function handleGuest() {
-    localStorage.setItem("boardingPassType", "explorer-guest");
-    window.location.href = "homepage.html";
-  }
 
   function submitFeedback(event) {
     event.preventDefault();
@@ -304,8 +325,40 @@ body {
       currentlyOpenId = id;
     }
   }
+
+// moving stuff around - Lehbah 
+// Show local times
+const departureTime = new Date();
+const arrivalTime = new Date(Date.now() + 5 * 60 * 60 * 1000); // +5 hours
+document.getElementById("dep-time").textContent = departureTime.toLocaleTimeString();
+document.getElementById("arr-time").textContent = arrivalTime.toLocaleTimeString();
+
+// Save & restore preferences
+function saveLang() {
+  const selectedLang = document.getElementById("lang").value;
+  localStorage.setItem("preferredLang", selectedLang);
+}
+
+function saveVolume() {
+  const selectedVolume = document.getElementById("volume").value;
+  localStorage.setItem("preferredVolume", selectedVolume);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const lang = localStorage.getItem("preferredLang");
+  const vol = localStorage.getItem("preferredVolume");
+
+  if (lang) document.getElementById("lang").value = lang;
+  if (vol) document.getElementById("volume").value = vol;
+
+  // Map setup (Leaflet)
+  const map = L.map('flight-map').setView([41.9028, 12.4964], 6); // Rome
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+  L.marker([41.9028, 12.4964]).addTo(map)
+      .bindPopup('Descending into Rome')
+      .openPopup();
+});
 </script>
-
-  
-
 </body> 
