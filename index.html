@@ -1,4 +1,5 @@
 <!DOCTYPE html> 
+<html>
 <head> 
     <meta charset="UTF-8">
     <!-- Leaflet.js for Interactive Map -->
@@ -145,17 +146,83 @@
   border-radius: 8px;
   max-width: 500px;
 }
+
+.announcement-tab {
+  position: fixed;
+  bottom: 50px;
+  left: 0;
+  background-color: #222;
+  color: white;
+  padding: 10px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  cursor: pointer;
+  z-index: 999;
+}
+
+.announcement-slider {
+  background-color: white;
+  border: 2px dashed #555;
+  margin: 0 auto 10px auto;
+  max-width: 90%;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  overflow: hidden;
+}
+
+.scrolling-text {
+  white-space: nowrap;
+  animation: scroll-left 15s linear infinite;
+}
+
+@keyframes scroll-left {
+  0%   { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+/*safety instructions css styling*/
+.safety-panel {
+  margin: 40px auto;
+  text-align: center;
+}
+.safety-panel button {
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.safety-panel button:hover {
+  background-color: red;
+}
+
+
 </style>
 </head>
 
 <body>
-<br><br>
+
 <div class="button-box">
     <button class="nav" onclick="handleLogin()">Login</button><br>
     <button class="nav" onclick="handleGuest()">Guest</button>
 </div>
 
 <h1>Welcome Aboard Your Digital In-Flight System</h1>
+ <!-- Stuff for announcement scrolling tab thingy -->
+   <div class="announcement-tab" onclick="toggleAnnouncements()">
+  <span>📢</span>
+</div>
+
+<div class="announcement-slider" id="announcement-slider">
+  <div class="scrolling-text" id="scrolling-text">
+   VISUAL ANNOUNCEMENTS: Welcome aboard! On the sidebar, you may contact a flight attendant, make a call, or leave feedback. Please double click 
+   to remove the pop-up after you are done using our services. Food & snack service begins in one hour, in the meantime, you can browse media, or do some shopping. Enjoy your flight! 
+  </div>
+</div>
+
 <hr> 
 <!-- Live Flight Dashboard Section -->
 <!-- Two-column layout -->
@@ -221,7 +288,7 @@
           <p>In-Flight Entertainment</p>
       </a>
     </div>
-    <!-- Shopping -->
+    <!-- Shopping, all linked together-->
     <div class="shopping-launch">
       <a href="shopping.html">
         <img src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png"
@@ -283,15 +350,15 @@
     <p>A flight attendant has been notified. Thank you for your patience.</p>
   </div>
 </div>
-<!-- Announcement/messafes for Deaf Users-->
- <div class="announcement-panel">
-  <h3>Announcements</h3>
-  <ul>
-    <li>🛫 Welcome aboard! We’re scheduled to depart at 9:15 PM.</li>
-    <li>☕ Snack service begins in 15 minutes.</li>
-    <li>🎬 Movies available in the Media section.</li>
-  </ul>
+<!-- Pleane Safety diagram-->
+<!-- Button to open safety page -->
+<div class="safety-panel">
+  <button onclick="window.location.href='safety.html'">
+    Please click here to view plane safety instructions.
+  </button>
 </div>
+
+
 
 <script>
 
@@ -362,4 +429,12 @@ document.addEventListener("DOMContentLoaded", () => {
       .openPopup();
 });
 </script>
+<script>
+function toggleAnnouncements() {
+  const slider = document.getElementById("announcement-slider");
+  slider.classList.toggle("show");
+}
+</script>
+
 </body> 
+</html>

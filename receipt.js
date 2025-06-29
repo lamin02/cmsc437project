@@ -30,5 +30,5 @@ if (order.length === 0) {
 }
 
 function goHome() {
-    window.location.href = "homepage.html";
+    window.location.href = "index.html";
 }
