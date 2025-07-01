@@ -1,4 +1,5 @@
 const products = [
+    //itmes for sale
     { id: 1, name: "Chanel No.5 Perfume", price: 175.99, description: "Luxury scent from France", image: "chanel.jpg" },
     { id: 2, name: "Ray-Ban Sunglasses", price: 289.99, description: "Stylish UV-protective", image: "rayban.webp" },
     { id: 3, name: "Seiko Watch", price: 129.00, description: "Classic analog watch", image: "shopp.webp" },
@@ -9,76 +10,77 @@ const products = [
      { id: 8, name: "Apple AirPods Pro (2nd Gen) with MagSafe Charging Case", price: 200.00, description: "Noise Cancelling Headphones", image: "headphones.jpg" }
 ];
 
+//for items in cart
 let cart = [];
+//for html
+const itemlist = document.getElementById("product-list");
+const itemscart = document.getElementById("cart-items");
+const pricetot = document.getElementById("total-price");
 
-const productList = document.getElementById("product-list");
-const cartItems = document.getElementById("cart-items");
-const totalPrice = document.getElementById("total-price");
-
-function renderProducts() {
+function renderItems() {
     products.forEach(item => {
         const card = document.createElement("div");
         card.className = "product-card";
+        //set up for item images
         card.innerHTML = `
             <img src="${item.image}" alt="${item.name}">
             <h4>${item.name}</h4>
             <p>${item.description}</p>
             <p><strong>$${item.price.toFixed(2)}</strong></p>
-            <button onclick="addToCart(${item.id})">Add to Cart</button>
+            <button onclick="addCart(${item.id})">Add to Cart</button>
         `;
-        productList.appendChild(card);
+        itemlist.appendChild(card);
     });
 }
 
-function addToCart(id) {
+function addCart(id) {
     const product = products.find(p => p.id === id);
     const existing = cart.find(item => item.id === id);
-
+    //if found add to quantiy
     if (existing) {
         existing.qty++;
     } else {
-        cart.push({ ...product, qty: 1 });  // ✅ FIXED: add qty when first added
+        cart.push({ ...product, qty: 1 });  
     }
-
-    updateCart();
+    //updates cart
+    cartup();
 }
 
-
-function removeFromCart(id) {
+function removecart(id) {
+    //uses filter to remove, then updates
     cart = cart.filter(item => item.id !== id);
-    updateCart();
+    cartup();
 }
 
-function updateCart() {
-    cartItems.innerHTML = "";
+function cartup() {
+    itemscart.innerHTML = "";
     let total = 0;
-
+    //price
     cart.forEach(item => {
-        total += item.price * item.qty; // FIXED here
-
+        total += item.price * item.qty; 
         const li = document.createElement("li");
-        li.textContent = `${item.name} x${item.qty} - $${(item.price * item.qty).toFixed(2)}`; // FIXED here
-        li.innerHTML += ` <button onclick="removeFromCart(${item.id})">Remove</button>`;
-        cartItems.appendChild(li);
+        li.textContent = `${item.name} x${item.qty} - $${(item.price * item.qty).toFixed(2)}`; 
+        li.innerHTML += ` <button onclick="removecart(${item.id})">Remove</button>`;
+        itemscart.appendChild(li);
     });
-
-    totalPrice.textContent = `Total: $${total.toFixed(2)}`;
+    //final total
+    pricetot.textContent = `Total: $${total.toFixed(2)}`;
 }
 
 function completePurchase() {
     const cardNumber = document.getElementById("shop-card").value;
     const status = document.getElementById("shop-status");
-
+    //nu,ber msut be greater than 10 
     if (!cardNumber || cardNumber.length < 10) {
         status.style.color = "red";
-        status.textContent = "Please enter a valid credit card number.";
+        status.textContent = "Invalid credit card number (must be >10 digits).";
         return;
     }
-
+    //latest item
     localStorage.setItem("latestOrder", JSON.stringify(cart));
     localStorage.setItem("lastCardUsed", cardNumber);
     window.location.href = "receipt.html";
 }
 
-
-renderProducts();
+//render in end
+renderItems();

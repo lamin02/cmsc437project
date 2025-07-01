@@ -4,7 +4,6 @@ body {
     margin: 0;
     padding: 20px;
 }
-
 .receipt-container {
     background-color: white;
     padding: 25px;
@@ -14,28 +13,23 @@ body {
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
-
 h1 {
     margin-bottom: 20px;
     color: #333;
 }
-
 #receipt-details {
     text-align: left;
     line-height: 1.6;
     margin-top: 20px;
     padding: 0 10px;
 }
-
 ul {
     list-style: none;
     padding: 0;
 }
-
 ul li {
     margin-bottom: 8px;
 }
-
 button {
     margin-top: 25px;
     padding: 10px 20px;
@@ -45,7 +39,6 @@ button {
     border-radius: 6px;
     cursor: pointer;
 }
-
 button:hover {
     background-color: #0070a1;
 }

@@ -1,3 +1,4 @@
+//items for sale
 const menu = [
     { id: 1, name: "Chicken Wrap", price: 9.99, image: "Cajun-Chicken-Wrap.jpg" },
     { id: 2, name: "Veggie Sandwich", price: 7.99, image: "veggie.jpg" },
@@ -8,7 +9,6 @@ const menu = [
     { id: 7, name: "Pizza", price: 2.99, image: "pizza.jpg" },
     { id: 8, name: "Caesar Salad", price: 3.49, image: "Caesar.jpg" }
 ];
-
 let order = [];
 
 const menuItems = document.getElementById("menu-items");
@@ -16,7 +16,7 @@ const orderList = document.getElementById("order-list");
 const orderTotal = document.getElementById("order-total");
 const statusBox = document.getElementById("order-status");
 
-function renderMenu() {
+function renderingMenu() {
     menu.forEach(item => {
         const card = document.createElement("div");
         card.className = "menu-card";
@@ -33,64 +33,60 @@ function renderMenu() {
 function addToOrder(id) {
     const found = order.find(item => item.id === id);
     const food = menu.find(f => f.id === id);
-
+    //adds item, else
     if (found) {
         found.qty++;
     } else {
         order.push({ ...food, qty: 1 });
     }
-
     updateOrder();
 }
 
+//updates order and orice
 function updateOrder() {
     orderList.innerHTML = "";
     let total = 0;
-
     order.forEach(item => {
         total += item.price * item.qty;
         const li = document.createElement("li");
         li.textContent = `${item.name} x${item.qty} - $${(item.price * item.qty).toFixed(2)}`;
         orderList.appendChild(li);
     });
-
     orderTotal.textContent = `Total: $${total.toFixed(2)}`;
 }
-//hi
+
+//submits for reci[t]
 function submitOrder() {
     const cardNumber = document.getElementById("card-number").value;
     const statusBox = document.getElementById("order-status");
 
     if (!cardNumber || cardNumber.length < 10) {
         statusBox.style.color = "red";
-        statusBox.textContent = "❌ Please enter a valid credit card number.";
+        statusBox.textContent = "Please enter a valid credit card number.";
         return;
     }
 
     // Show order placed status
     statusBox.style.color = "green";
-    statusBox.textContent = "✅ Order placed... Status: Ordered";
+    statusBox.textContent = "Order placed... Status: Ordered";
 
     // Step 1: Change to "Preparing"
     setTimeout(() => {
-        statusBox.textContent = "⏳ Status: Preparing";
+        statusBox.textContent = "Status: Preparing";
     }, 2000);
 
-    // Step 2: Change to "Delivered" and redirect to receipt
+    // chanegs to delivered
     setTimeout(() => {
-        statusBox.textContent = "✅ Status: Delivered";
-
-        // Save to localStorage for receipt.html
+        statusBox.textContent = "Status: Delivered";
+        // saves to local storage
         localStorage.setItem("latestOrder", JSON.stringify(order));
         localStorage.setItem("lastCardUsed", cardNumber);
-
-        // Redirect to receipt after a pause
+        // goes to receipt after the pasue
         setTimeout(() => {
             window.location.href = "receipt.html";
-        }, 1500); // short delay so user sees "Delivered ✅"
-
+        }, 1500); // short delay so user sees "Delivered , enjoy!"
     }, 5000);
 }
 
 
-renderMenu();
+renderingMenu();
