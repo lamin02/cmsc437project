@@ -1,7 +1,19 @@
 <!DOCTYPE html> 
 <html>
-<head> 
+<head>
+  
     <meta charset="UTF-8">
+  <script>
+    // Only run if they arrived at index.html directly
+    const newSession = sessionStorage.getItem("visitedThisSession");
+  
+    if (!newSession) {
+      // First visit in this browser tab
+      sessionStorage.setItem("visitedThisSession", "yes");
+      window.location.href = "login.html";
+    }
+  </script>
+
     <!-- Leaflet.js for Interactive Map -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -205,10 +217,6 @@
 
 <body>
 
-<div class="button-box">
-    <button class="nav" onclick="handleLogin()">Login</button><br>
-    <button class="nav" onclick="handleGuest()">Guest</button>
-</div>
 
 <h1>Welcome Aboard Your Digital In-Flight System</h1>
  <!-- Stuff for announcement scrolling tab thingy -->
