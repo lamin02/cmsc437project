@@ -1,0 +1,80 @@
+<!-- Profile Creation Page — LEHBAH EDIT AS NEEDED-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Flight Check-In | Create Profile</title>
+  <style>
+    body {
+      background: lightblue;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 60px;
+    }
+
+    .checkin-container {
+      max-width: 420px;
+      margin: auto;
+      border: 2px solid #000;
+      border-radius: 10px;
+      padding: 30px;
+      background-color: white;
+      box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 22px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .name-error-msg {
+      color: red;
+      font-size: 14px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="checkin-container">
+    <h1>Create Verified Flyer Profile</h1>
+    <form onsubmit="startFlightSession(event)">
+      <label for="flyerNameInput">Enter Full Name:</label>
+      <input type="text" id="flyerNameInput" placeholder="e.g. FirstName LastName" />
+      <p id="missingNameAlert" class="name-error-msg" style="display: none;">Name required to proceed.</p>
+      <button type="submit">Create</button>
+    </form>
+  </div>
+
+  <script>
+    function startFlightSession(event) {
+      event.preventDefault();
+      const flyerName = document.getElementById("flyerNameInput").value.trim();
+
+      if (flyerName === "") {
+        document.getElementById("missingNameAlert").style.display = "block";
+      } else {
+        localStorage.setItem("profileName", flyerName);
+        window.location.href = "index.html";
+      }
+    }
+  </script>
+
+</body>
+</html>

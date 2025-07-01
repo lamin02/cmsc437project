@@ -1,5 +1,7 @@
 <!--NIMAH - Login page to direct user to index.html-->
 
+<!--NIMAH - Login page to direct user to index.html-->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,13 +46,13 @@
 </div>
 
 <script>
-  function selectGuest() {
-    localStorage.setItem("boardingPassType", "explorer-guest");
-    window.location.href = "index.html";
+  function selectTraveler() {
+    // Send user to profile creation page
+    window.location.href = "profile.html";
   }
 
-  function selectTraveler() {
-    localStorage.setItem("boardingPassType", "verified-traveler");
+  function selectGuest() {
+    localStorage.setItem("profileName", "Guest");
     window.location.href = "index.html";
   }
 </script>

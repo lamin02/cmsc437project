@@ -172,20 +172,6 @@
   }
 </script>
 
-<div class="button-box">
-  <button onclick="selectTraveler()">Verified Flyer</button>
-  <button onclick="selectGuest()">Guest Explorer</button>
-</div>
-<script>
-  function selectGuest() {
-    localStorage.setItem("boardingPassType", "explorer-guest");
-    window.location.href = "index.html";
-  }
-  function selectTraveler() {
-    window.location.href = "create-profile.html";
-  }
-</script>
-
 <div class="announcement-slider" id="announcement-slider">
   <div class="scrolling-text" id="scrolling-text">
    VISUAL ANNOUNCEMENTS: Welcome aboard! On the sidebar, you may contact a flight attendant, make a call, or leave feedback. Please double click 
