@@ -12,16 +12,27 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <title> In Flight System </title> 
+
+  <!-- I researched how to add the font stuff to make CSS look prettier-->
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
   <style>
-    body {
-      background-color: lightskyblue;
-      padding-right: 180px; 
-      margin: 0; 
-      overflow-x: hidden; 
-    }
-    h1 {
-      text-align: center; 
-    }
+   body {
+  background-color: #f6d365;
+  font-family: 'Poppins', sans-serif;
+  color: #2e2e2e;
+}
+/* alternative color choicce: 2c3e50*/
+h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #3c3c3c;
+  text-align: center;
+  margin-top: 40px;
+  letter-spacing: 1px;
+}
+
+
     hr { 
       color: black;
     }
@@ -89,18 +100,21 @@
       text-decoration: none;
       color: black;
     }
-    .media-icon, .shopping-icon {
-      width: 120px;
-      height: 120px;
-      border: 4px solid black;
-      border-radius: 10px;
-      background-color: white;
-      padding: 10px;
-      transition: transform 0.3s ease;
-    }
-    .media-icon:hover, .shopping-icon:hover {
-      transform: scale(1.1);
-    }
+ .menu-icon {
+  width: 120px;
+  height: 120px;
+  border: 4px solid black;
+  border-radius: 12px;
+  background-color: white;
+  padding: 10px;
+  transition: transform 0.3s ease;
+  object-fit: contain;
+}
+
+.menu-icon:hover {
+  transform: scale(1.1);
+}
+
         /*This is the food page stuff*/
     .food-launch {
       text-align: center;
@@ -123,13 +137,17 @@
       transform: scale(1.1);
 }
 
-    .feedback-form, .phone-call-form {
-      margin: 40px auto;
-      background-color: #fff8dc;
-      padding: 20px;
-      border-radius: 8px;
-      border: 2px solid black;
-    }
+ .feedback-form, .phone-call-form {
+  background-color: #fff;
+  border: 1px solid #a67c52;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  margin: 40px auto;
+}
+
     .phone-call-form {
       background-color: #eef;
       border: 2px solid navy;
@@ -196,17 +214,19 @@
 
 <div class="announcement-slider" id="announcement-slider">
   <div class="scrolling-text" id="scrolling-text">
-   VISUAL ANNOUNCEMENTS: Welcome aboard! On the sidebar, you may contact a flight attendant, make a call, or leave feedback. Please double click 
-   to remove the pop-up after you are done using our services. Food & snack service begins in one hour, in the meantime, you can browse media, or do some shopping. Enjoy your flight! 
+   Current Announcements: Welcome aboard! On the sidebar, you may contact a flight attendant, make a call, or leave feedback. 
+   Food & snack service begins in one hour, in the meantime, you can browse media, or do some shopping. Enjoy your flight! 
   </div>
 </div>
 
 <hr> 
 <!-- Live Flight Dashboard Section -->
 <!-- Two-column layout -->
-<div style="display: flex; flex-direction: row; justify-content: space-between; padding: 40px;">
+<div style="display: flex; flex-direction: row; gap: 40px; align-items: flex-start; padding: 40px;">
+
   <!-- LEFT COLUMN -->
-  <div style="flex: 1; padding-right: 40px;">
+  <div style="flex: 0.5; padding-right: 40px;">
+
 
     <h2>Current Flight Details</h2>
     <ul>
@@ -254,15 +274,16 @@
 
   </div>
   <!-- RIGHT COLUMN -->
-  <div style="flex: 0.6; display: flex; flex-direction: column; align-items: center; gap: 20px; margin-top: 80px;">
-
+  <div style="flex: 0.5; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; margin-top: 40px;">
 
     <!-- Media -->
+     <div style="display: flex; gap: 40px; justify-content: center;">
+
     <div class="media-launch">
       <a href="media.html">
           <img src="https://cdn-icons-png.flaticon.com/512/727/727245.png" 
                alt="Movies" 
-               class="media-icon">
+               class="menu-icon">
           <p>In-Flight Entertainment</p>
       </a>
     </div>
@@ -271,12 +292,14 @@
       <a href="shopping.html">
         <img src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png"
              alt="Shopping"
-             class="shopping-icon">
+             class="menu-icon">
         <p>Duty-Free Shopping</p>
       </a>
     </div>
+    </div> 
+
      <!-- food and brev, all linked together-->
-    <div class="food-launch">
+    <div class="food-launch" style="margin-top: 40px;">
       <a href="food.html">
         <img src="dish.png"
              alt="Shopping"
@@ -302,11 +325,11 @@
 <!-- SIDEBAR SECTION: FEEDBACK -->
 <div id="feedback-section" class="sidebar-section" style="display: none;">
   <div class="feedback-form">
-    <h3>Report an Issue / Leave Feedback</h3>
+    <h3>Report an Issue or Leave Feedback</h3>
     <form onsubmit="submitFeedback(event)">
       <label for="feedback-type">Type:</label>
       <select id="feedback-type">
-        <option>Bug</option>
+        <option>Issue</option>
         <option>Suggestion</option>
         <option>Other</option>
       </select><br><br>
@@ -315,21 +338,37 @@
       <textarea id="feedback-msg" rows="4" cols="30" placeholder="Write here..."></textarea><br><br>
 
       <button type="submit">Submit</button>
-      <p id="feedback-confirm" style="color: green;"></p>
+      <p id="feedback-confirm" style="color: black;"></p>
     </form>
+    <button onclick="closeSection('feedback-section')" style="margin-top: 10px; background-color: #ccc; color: #333;">Exit</button>
+
   </div>
 </div>
 <!-- SIDEBAR SECTION: CALL -->
 <div id="call-section" class="sidebar-section" style="display: none;">
   <div class="phone-call-form">
-    <h3>Make a Phone Call</h3>
-    <form onsubmit="alert('Connecting... (mock)'); return false;">
-      <label for="number">Enter Number:</label><br>
-      <input type="tel" id="number" placeholder="+1-202-555-0182"><br><br>
-      <button type="submit">Call</button>
+    <h3>Pay to Call</h3>
+    <form onsubmit="processCallPayment(event)">
+      <label for="number">Phone Number:</label><br>
+      <input type="tel" id="number" placeholder="+1-202-555-0182" required><br><br>
+
+      <label for="card">Credit Card Number:</label><br>
+      <input type="text" id="card" placeholder="1234 5678 9012 3456" required><br><br>
+
+      <label for="expiry">Expiry Date:</label><br>
+      <input type="text" id="expiry" placeholder="MM/YY" required><br><br>
+
+      <label for="cvv">CVV:</label><br>
+      <input type="text" id="cvv" placeholder="123" required><br><br>
+
+      <button type="submit">Pay & Call</button>
+      <p id="call-confirm" style="color: black; margin-top: 10px;"></p>
     </form>
+    <button onclick="closeSection('call-section')" style="margin-top: 10px; background-color: #ccc; color: #333;">Exit</button>
+  </div>
   </div>
 </div>
+
 <!-- SIDEBAR SECTION: ATTENDANT -->
 <div id="attendant-section" class="sidebar-section" style="display: none;">
   <div style="text-align: center; margin-top: 40px;">
@@ -420,8 +459,33 @@ document.addEventListener("DOMContentLoaded", () => {
 function toggleAnnouncements() {
   const slider = document.getElementById("announcement-slider");
   slider.classList.toggle("show");
+}function processCallPayment(event) {
+  event.preventDefault();
+
+  const phone = document.getElementById("number").value;
+  const card = document.getElementById("card").value;
+  const expiry = document.getElementById("expiry").value;
+  const cvv = document.getElementById("cvv").value;
+
+  if (!phone || !card || !expiry || !cvv) {
+    alert("Please fill out all payment fields.");
+    return;
+  }
+
+  // Simulate payment processing
+  document.getElementById("call-confirm").textContent = 
+    `Payment successful. Calling ${phone}... Thank you for checking out!`;
+
+  console.log("📞 Paid call to:", phone);
+  console.log("💳 Card:", card, " Expiry:", expiry, " CVV:", cvv);
+}
+function closeSection(id) {
+  const section = document.getElementById(id);
+  if (section) {
+    section.style.display = "none";
+    currentlyOpenId = null;
+  }
 }
 </script>
-
 </body> 
 </html>
