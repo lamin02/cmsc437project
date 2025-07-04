@@ -9,8 +9,9 @@ const menu = [
     { id: 7, name: "Pizza", price: 2.99, image: "pizza.jpg" },
     { id: 8, name: "Caesar Salad", price: 3.49, image: "Caesar.jpg" }
 ];
+//holds things
 let order = [];
-
+//htnl stuff
 const menuItems = document.getElementById("menu-items");
 const orderList = document.getElementById("order-list");
 const orderTotal = document.getElementById("order-total");
@@ -56,6 +57,7 @@ function updateOrder() {
 }
 
 //submits for reci[t]
+//submits for reci[p] and history
 function submitOrder() {
     const cardNumber = document.getElementById("card-number").value;
     const statusBox = document.getElementById("order-status");
@@ -70,23 +72,34 @@ function submitOrder() {
     statusBox.style.color = "green";
     statusBox.textContent = "Order placed... Status: Ordered";
 
-    // Step 1: Change to "Preparing"
+    // prepaing
     setTimeout(() => {
         statusBox.textContent = "Status: Preparing";
     }, 2000);
 
-    // chanegs to delivered
+    // changes to delivered
     setTimeout(() => {
         statusBox.textContent = "Status: Delivered";
-        // saves to local storage
-        localStorage.setItem("latestOrder", JSON.stringify(order));
+
+        // creates order object for food
+        const currentOrder = {
+            id: Date.now(), 
+            items: order,
+            total: order.reduce((sum, item) => sum + item.price * item.qty, 0),
+            card: cardNumber,
+            timestamp: new Date().toLocaleString()
+        };
+        //localstotage
+        const history = JSON.parse(localStorage.getItem("orderHistory") || "[]");
+        history.push(currentOrder);
+        localStorage.setItem("orderHistory", JSON.stringify(history));
+        // saves latest for receipt on index.html
+        localStorage.setItem("latestOrder", JSON.stringify(currentOrder));
         localStorage.setItem("lastCardUsed", cardNumber);
-        // goes to receipt after the pasue
         setTimeout(() => {
             window.location.href = "receipt.html";
-        }, 1500); // short delay so user sees "Delivered , enjoy!"
+        }, 1500); 
     }, 5000);
 }
-
 
 renderingMenu();

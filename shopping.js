@@ -5,13 +5,14 @@ const products = [
     { id: 3, name: "Seiko Watch", price: 129.00, description: "Classic analog watch", image: "shopp.webp" },
     { id: 4, name: "Estée Lauder Double Wear Foundation", price: 129.00, description: "Stay in place Makeup", image: "estee.avif" },
     { id: 5, name: "Toblerone Chocolate", price: 19.00, description: "Delicious Chocolate", image: "choc.webp" },
-     { id: 6, name: "Marlboro Cigarettes", price: 120.00, description: "Smooth Cigarettes", image: "cig.webp" },
-     { id: 7, name: "Bose Headphones", price: 220.00, description: "Noise Cancelling Headphones", image: "bose.webp" },
-     { id: 8, name: "Apple AirPods Pro (2nd Gen) with MagSafe Charging Case", price: 200.00, description: "Noise Cancelling Headphones", image: "headphones.jpg" }
+    { id: 6, name: "Marlboro Cigarettes", price: 120.00, description: "Smooth Cigarettes", image: "cig.webp" },
+    { id: 7, name: "Bose Headphones", price: 220.00, description: "Noise Cancelling Headphones", image: "bose.webp" },
+    { id: 8, name: "Apple AirPods Pro (2nd Gen) with MagSafe Charging Case", price: 200.00, description: "Noise Cancelling Headphones", image: "headphones.jpg" }
 ];
 
 //for items in cart
 let cart = [];
+
 //for html
 const itemlist = document.getElementById("product-list");
 const itemscart = document.getElementById("cart-items");
@@ -70,15 +71,32 @@ function cartup() {
 function completePurchase() {
     const cardNumber = document.getElementById("shop-card").value;
     const status = document.getElementById("shop-status");
+
     //nu,ber msut be greater than 10 
     if (!cardNumber || cardNumber.length < 10) {
         status.style.color = "red";
         status.textContent = "Invalid credit card number (must be >10 digits).";
         return;
     }
+
+    //create new order object
+    const currentOrder = {
+        id: Date.now(), //unique order ID
+        items: cart,
+        total: cart.reduce((sum, item) => sum + item.price * item.qty, 0),
+        card: cardNumber,
+        timestamp: new Date().toLocaleString()
+    };
+
+    //get existing orders or empty array
+    const orderHistory = JSON.parse(localStorage.getItem("orderHistory") || "[]");
+    orderHistory.push(currentOrder); //add current order
+    localStorage.setItem("orderHistory", JSON.stringify(orderHistory)); //save history
+
     //latest item
-    localStorage.setItem("latestOrder", JSON.stringify(cart));
+    localStorage.setItem("latestOrder", JSON.stringify(currentOrder));
     localStorage.setItem("lastCardUsed", cardNumber);
+
     window.location.href = "receipt.html";
 }
 

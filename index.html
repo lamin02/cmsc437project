@@ -135,7 +135,30 @@ h1 {
     }
     .food-icon:hover {
       transform: scale(1.1);
-}
+    }
+
+
+
+     .history-launch {
+      text-align: center;
+      margin: 60px auto;
+    }
+    .history-launch a {
+      text-decoration: none;
+      color: black;
+    }
+    .history-icon {
+      width: 120px;
+      height: 120px;
+      border: 4px solid black;
+      border-radius: 10px;
+      background-color: white;
+      padding: 10px;
+      transition: transform 0.3s ease;
+    }
+    .history-icon:hover {
+      transform: scale(1.1);
+    }
 
  .feedback-form, .phone-call-form {
   background-color: #fff;
@@ -298,16 +321,30 @@ h1 {
     </div>
     </div> 
 
-     <!-- food and brev, all linked together-->
-    <div class="food-launch" style="margin-top: 40px;">
-      <a href="food.html">
-        <img src="dish.png"
-             alt="Shopping"
-             class="food-icon">
-        <p>Food and Beverage</p>
-      </a>
-    </div>
+  <!-- Flex row for Food and History -->
+<div style="display: flex; gap: 40px; justify-content: center; margin-top: 40px;">
+  
+  <div class="food-launch">
+    <a href="food.html">
+      <img src="dish.png"
+           alt="Food"
+           class="food-icon">
+      <p>Food and Beverage</p>
+    </a>
   </div>
+
+  <div class="history-launch">
+    <a href="history.html">
+      <img src="https://cdn-icons-png.flaticon.com/512/891/891462.png" 
+           alt="History Icon" 
+           class="history-icon">
+      <p>View Past Receipts</p>
+    </a>
+  </div>
+
+</div>
+
+
 </div>
 
 <!-- LEHBAH - SideBar stuff-->
