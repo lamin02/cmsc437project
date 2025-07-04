@@ -4,11 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>In-Flight Homepage</title>
-
     <!-- Leaflet.js integration (researched this for how to integrate interactive map) -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
     <style>
         #flight-map {
             height: 300px;
@@ -19,7 +17,6 @@
     </style>
 </head>
 <body>
-
 <h1 id="passenger-greeting">Welcome!</h1>
 <hr>
 
@@ -30,7 +27,6 @@
     <li>Estimated Departure: 9:15 PM</li>
     <li>Boarding Gate: A12</li>
 </ul>
-
 <!-- Live Flight Info -->
 <h2>Live Flight Stats</h2>
 <ul>
@@ -38,18 +34,15 @@
     <li>Current Location: <span id="location-display">Near Rome</span></li>
     <li>Estimated Time of Arrival: <span id="eta-display">11:30 PM</span></li>
 </ul>
-
 <!-- Interactive Map -->
 <h2>Flight Location Map</h2>
 <div id="flight-map"></div>
-
 <!-- Local Time -->
 <h2>Local Times</h2>
 <ul>
     <li>Departure Local Time: <span id="dep-time"></span></li>
     <li>Arrival Local Time: <span id="arr-time"></span></li>
 </ul>
-
 <!--Preferences -->
 <h2>Your Preferences</h2>
 <label for="lang">Language:</label>
@@ -67,10 +60,8 @@
   <option value="pt">Portuguese</option>
   <option value="ru">Russian</option>
 </select>
-
 <label for="volume">Volume:</label>
 <input type="range" id="volume" min="0" max="100" onchange="saveVolume()">
-
 <!-- JSON implementation -->
 <script>
     // Session-based welcome
@@ -86,55 +77,45 @@
     else {
         greetingBanner.textContent = "Welcome aboard!";
     }
-
     // Local time display
     const departureTime = new Date();
     const arrivalTime = new Date(Date.now() + 5 * 60 * 60 * 1000); // 5 hours ahead
     document.getElementById("dep-time").textContent = departureTime.toLocaleTimeString();
     document.getElementById("arr-time").textContent = arrivalTime.toLocaleTimeString();
-
     // Save language and volume preferences
     function saveLang() {
         const selectedLang = document.getElementById("lang").value;
         localStorage.setItem("preferredLang", selectedLang);
     }
-
     function saveVolume() {
         const selectedVolume = document.getElementById("volume").value;
         localStorage.setItem("preferredVolume", selectedVolume);
     }
-
     // Restore preferences on load
     document.addEventListener("DOMContentLoaded", () => {
         const lang = localStorage.getItem("preferredLang");
         const vol = localStorage.getItem("preferredVolume");
-
         if (lang) {
             document.getElementById("lang").value = lang;
         }
         if (vol) {
             document.getElementById("volume").value = vol;
         }
-
         // Initialize Leaflet map (researched on how to integrate - recommended me leaflet)
         const map = L.map('flight-map').setView([41.9028, 12.4964], 6); // Rome coordinates
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
-
         L.marker([41.9028, 12.4964]).addTo(map)
             .bindPopup('Descending into Rome') // leaflet attribute, allows a little window to pop up
             .openPopup();
-
         // Phase 3 - Auto session redirect if no role saved
         if (!boardingPassType) {
         alert("No active session. Please log in again.");
         window.location.href = "index.html"; // send back to login
     }
-
     // Phase 3 - Session timeout
     let inactivityTimer;
-
     function resetSessionClock() {
         clearTimeout(inactivityTimer);
         inactivityTimer = setTimeout(() => {
@@ -143,7 +124,6 @@
             window.location.href = "index.html"; // send back to login
         }, 10 * 60 * 1000); // 10 min mult. by 60 and 10000 for minute calculation
     }
-
     // Start timer and reset it on any activity
     resetSessionClock();
     document.onclick = resetSessionClock;
@@ -151,5 +131,4 @@
     document.onkeydown = resetSessionClock;
     });
 </script>
-
 </body>

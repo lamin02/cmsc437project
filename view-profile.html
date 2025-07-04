@@ -1,0 +1,109 @@
+<!--Should display user info (saved info from creating a profile, allow to edit profile)-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Profile</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f9f9f9;
+      padding: 50px;
+    }
+
+    .container {
+      max-width: 520px;
+      margin: auto;
+      background-color: white;
+      padding: 30px;
+      border: 2px solid black;
+      border-radius: 10px;
+      box-shadow: 2px 4px 12px rgba(0,0,0,0.15);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .info {
+      margin-bottom: 15px;
+    }
+
+    .info strong {
+      display: inline-block;
+      width: 160px;
+      color: #333;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .back-button {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .back-button:hover {
+      background-color: #3a9e41;
+    }
+
+    .edit-button {
+      background-color: #007BFF;
+      color: white;
+    }
+
+    .edit-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Your Profile</h1>
+    <div class="info"><strong>Name:</strong> <span id="nameField"></span></div>
+    <div class="info"><strong>Email:</strong> <span id="emailField"></span></div>
+    <div class="info"><strong>Favorite Genre:</strong> <span id="genreField"></span></div>
+    <div class="info"><strong>Preferred Volume:</strong> <span id="volumeField"></span></div>
+    <div class="info"><strong>Seat Angle:</strong> <span id="seatField"></span>°</div>
+    <div class="info"><strong>Wake for Snacks:</strong> <span id="snacksField"></span></div>
+
+    <div class="buttons">
+      <button class="back-button" onclick="goBack()">Back to Dashboard</button>
+      <button class="edit-button" onclick="editProfile()">Edit Profile</button>
+    </div>
+  </div>
+
+  <script>
+    // Load saved data from localStorage and display
+    document.getElementById("nameField").textContent = localStorage.getItem("profileName") || "N/A";
+    document.getElementById("emailField").textContent = localStorage.getItem("profileEmail") || "N/A";
+    document.getElementById("genreField").textContent = localStorage.getItem("favoriteGenre") || "N/A";
+    document.getElementById("volumeField").textContent = localStorage.getItem("preferedVolume") || "N/A";
+    document.getElementById("seatField").textContent = localStorage.getItem("seatAngle") || "N/A";
+    document.getElementById("snacksField").textContent = localStorage.getItem("wakeForSnacks") === "yes" ? "Yes" : "No";
+
+    function goBack() {
+      window.location.href = "index.html";
+    }
+
+    function editProfile() {
+      window.location.href = "profile.html";
+    }
+  </script>
+
+</body>
+</html>
