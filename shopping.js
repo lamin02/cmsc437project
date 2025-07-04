@@ -71,15 +71,13 @@ function cartup() {
 function completePurchase() {
     const cardNumber = document.getElementById("shop-card").value;
     const status = document.getElementById("shop-status");
-
     //nu,ber msut be greater than 10 
     if (!cardNumber || cardNumber.length < 10) {
         status.style.color = "red";
         status.textContent = "Invalid credit card number (must be >10 digits).";
         return;
     }
-
-    //create new order object
+    //new order object
     const currentOrder = {
         id: Date.now(), //unique order ID
         items: cart,
@@ -87,18 +85,14 @@ function completePurchase() {
         card: cardNumber,
         timestamp: new Date().toLocaleString()
     };
-
-    //get existing orders or empty array
+    //get orders
     const orderHistory = JSON.parse(localStorage.getItem("orderHistory") || "[]");
     orderHistory.push(currentOrder); //add current order
     localStorage.setItem("orderHistory", JSON.stringify(orderHistory)); //save history
-
     //latest item
     localStorage.setItem("latestOrder", JSON.stringify(currentOrder));
     localStorage.setItem("lastCardUsed", cardNumber);
-
+    //tor eceipt
     window.location.href = "receipt.html";
 }
-
-//render in end
 renderItems();
