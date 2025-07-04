@@ -358,6 +358,12 @@ h1 {
   <a href="#" onclick="showSection('feedback-section')" title="Submit Feedback">
     <img src="feedBackIcon.png" class="icon-button" alt="Feedback">
   </a>
+  <div id="weather-box" style="margin-top: 30px; text-align: center; padding: 10px; border-top: 1px solid #ccc;">
+  <h4>Rome Weather</h4>
+  <p id="weather-desc">Loading...</p>
+  <p id="weather-temp"></p>
+</div>
+
 </div>
 <!-- SIDEBAR SECTION: FEEDBACK -->
 <div id="feedback-section" class="sidebar-section" style="display: none;">
@@ -524,5 +530,18 @@ function closeSection(id) {
   }
 }
 </script>
+<script>
+fetch("https://api.open-meteo.com/v1/forecast?latitude=41.9028&longitude=12.4964&current_weather=true")
+  .then(response => response.json())
+  .then(data => {
+    const weather = data.current_weather;
+    document.getElementById("weather-desc").textContent = `Condition: ${weather.weathercode === 0 ? 'Clear' : 'Cloudy'}`;
+    document.getElementById("weather-temp").textContent = `Temp: ${weather.temperature}°C`;
+  })
+  .catch(err => {
+    document.getElementById("weather-desc").textContent = "Unable to load.";
+  });
+</script>
+
 </body> 
 </html>
